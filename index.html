@@ -8,8 +8,43 @@
     <title>Feedback Modal Component - FrontendPro Challenge</title>
   </head>
   <body>
-    <!-- Write your HTML here -->
 
+    <div class="container">
+      <button id="openModalBtn" class="trigger-button">Give Feedback</button>
+    </div>
+
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <button id="closeBtn" class="close-btn">&times;</button>
+        <h2>How likely are you to recommend FrontendPro  <br> to someone you know?</h2>
+
+        <div class="rating-scale">
+          <!-- Rating buttons-->
+          <div class="ratings">
+            <button class="rating-btn">1</button>
+            <button class="rating-btn">2</button>
+            <button class="rating-btn">3</button>
+            <button class="rating-btn">4</button>
+            <button class="rating-btn">5</button>
+            <button class="rating-btn">6</button>
+            <button class="rating-btn">7</button>
+            <button class="rating-btn">8</button>
+            <button class="rating-btn">9</button>
+            <button class="rating-btn">10</button>
+          </div>
+          <div class="labels-container">
+            <span class="label left">Not likely at all</span>
+            <span class="label right">Extremely Likely</span>
+          </div>
+        </div>
+
+    <div class="modal-actions">
+      <button id="cancelBtn" class="cancel">Cancel</button>
+      <button id="submitBtn" class="submit">Submit</button>
+    </div>
+      </div>
+    </div>  
+    
     <script src="/src/script.js"></script>
   </body>
 </html>
