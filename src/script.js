@@ -6,11 +6,16 @@ const cancelBtn = document.getElementById("cancelBtn");
 const submitBtn = document.getElementById("submitBtn");
 const closeBtn = document.getElementById("closeBtn");
 const ratingButtons = document.querySelectorAll(".rating-btn");
+const thankYouMessage = document.getElementById("thankYouMessage");
 
 let selectedRating = null;
 
-// Check for previous rating in localStorage
-const storedRatings = JSON.parse(localStorage.getItem('userRatings')) || [];
+// Check for previous rating and show message if exists
+const lastRating = localStorage.getItem('lastRating');
+if (lastRating) {
+  const ratingData = JSON.parse(lastRating);
+  showThankYouMessage(ratingData.message);
+}
 
 console.log("Open Modal Button:", openModalBtn);
 console.log("Modal Element:", Modal);
@@ -51,24 +56,31 @@ ratingButtons.forEach((button) => {
   });
 });
 
+// Function to show thank you message
+function showThankYouMessage(message) {
+  thankYouMessage.textContent = message;
+  thankYouMessage.classList.add('show');
+}
+
 //submit feedback
 submitBtn.addEventListener("click", () => {
   if (selectedRating) {
     // Store the rating with timestamp
     const ratingData = {
       rating: selectedRating,
+      message: `Thank you for rating us ${selectedRating}/10!`,
       timestamp: new Date().toISOString()
     };
     
-    storedRatings.push(ratingData);
-    localStorage.setItem('userRatings', JSON.stringify(storedRatings));
+    // Store only the latest rating
+    localStorage.setItem('lastRating', JSON.stringify(ratingData));
     
-    alert(`Thank you for rating us ${selectedRating}/10!`);
+    // Show thank you message
+    showThankYouMessage(ratingData.message);
+    
     Modal.classList.add("hidden");
     selectedRating = null;
     ratingButtons.forEach((btn) => btn.classList.remove("selected"));
-    
-    console.log('Stored Ratings:', storedRatings);
   } else {
     alert("Please select a rating before submitting.");
   }
@@ -76,6 +88,6 @@ submitBtn.addEventListener("click", () => {
 
 // Function to get all stored ratings
 function getStoredRatings() {
-  return JSON.parse(localStorage.getItem('userRatings')) || [];
+  return JSON.parse(localStorage.getItem('userRatings'));
 }
 

@@ -18,6 +18,20 @@ body {
   text-align: center;
 }
 
+.thank-you-message {
+  margin-top: 20px;
+  color: #2d2d3a;
+  font-size: 16px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+}
+
+.thank-you-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .trigger-button{
   background-color: #2d2d3a;
   color: white;
